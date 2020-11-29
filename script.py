@@ -1,4 +1,3 @@
-
 def printSudoku(sudoku):
     for array in sudoku:
         print(" ".join(map(str, array)))
@@ -101,17 +100,19 @@ def getPosWithMostClues(notes):
     for x in range(9):
         for y in range(9):
             if len(notes[y][x]) > 0:
-                amount = len([e for e in notes[y][x] if e])
+                amount = notes[y][x].count(True)
                 if amount < min:
                     min = amount
                     pos = [x, y]
+                    if min == 2:
+                        return pos
     return pos
 
 
 def isInvalid(sudoku, notes):
     for x in range(9):
         for y in range(9):
-            if sudoku[y][x] == 0 and len([e for e in notes[y][x] if not e]) == 9:
+            if sudoku[y][x] == 0 and notes[y][x].count(False) == 9:
                 return True
     return False
 
